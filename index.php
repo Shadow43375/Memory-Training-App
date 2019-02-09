@@ -353,6 +353,7 @@ function highlight(oldRandom, usersTestInput, settings) {
         this.nextButton.dataset.dismiss = ""
         this.nextButton.classList.add("btn-success");
         this.nextButton.innerHTML = "Next";
+        console.log(this._isTimed);
         if(this._isTimed === true) {
           document.getElementById("currentModalTitle").innerHTML = "Memorize the Digits <span class='text-muted' style='font-size: 0.8em' id='countdownExample'>00:00:00</span>";
           this._timer.start({countdown: true, startValues: {seconds: this._timerValue.seconds, minutes: this._timerValue.minutes, hours: this._timerValue.hours}});
@@ -431,13 +432,13 @@ function highlight(oldRandom, usersTestInput, settings) {
   let isTimedCheckbox = document.getElementById("isTimedCheckbox");
   isTimedCheckbox.addEventListener('click', function(){
     if(!this.checked) {
-      appState._isTimed = false;
+      // appState._isTimed = false;
       hoursInput.disabled = true;
       minsInput.disabled = true;
       secondsInput.disabled = true;
     }
     else if(this.checked) {
-      appState._isTimed = true;
+      // appState._isTimed = true;
       hoursInput.disabled = false;
       minsInput.disabled = false;
       secondsInput.disabled = false;
@@ -451,6 +452,7 @@ function highlight(oldRandom, usersTestInput, settings) {
     let opt = sel.options[sel.selectedIndex];
     // console.log( opt.value );
     appState = new State(opt.value);
+    appState._isTimed = isTimedCheckbox.checked;
     appState._timerValue.seconds = Number(secondsInput.value);
     appState._timerValue.minutes = Number(minsInput.value);
     appState._timerValue.hours = Number(hoursInput.value);
